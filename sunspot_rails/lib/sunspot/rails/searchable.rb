@@ -251,17 +251,22 @@ module Sunspot #:nodoc:
           progress_bar = options[:progress_bar]
           if options[:batch_size]
             batch_counter = 0
-            find_in_batches(find_in_batch_options) do |records|
-              solr_benchmark options[:batch_size], batch_counter do
-                Sunspot.index(records.select { |model| model.indexable? })
-                Sunspot.commit if options[:batch_commit]
+            ActiveRecord::Base.uncached do
+              find_in_batches(find_in_batch_options) do |records|
+                solr_benchmark options[:batch_size], batch_counter do
+                  Sunspot.index(records.select { |model| model.indexable? })
+                  Sunspot.commit if options[:batch_commit]
+                end
+                # track progress
+                progress_bar.increment!(records.length) if progress_bar
+                batch_counter += 1
               end
-              # track progress
-              progress_bar.increment!(records.length) if progress_bar
-              batch_counter += 1
             end
           else
-            records = all(:include => options[:include]).select { |model| model.indexable? }
+            records = []
+            ActiveRecord::Base.uncached do
+              records = all(:include => options[:include]).select { |model| model.indexable? }
+            end
             Sunspot.index!(records)
           end
           # perform a final commit if not committing in batches
