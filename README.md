@@ -1,6 +1,7 @@
 # Sunspot
 
 [![Build Status](https://secure.travis-ci.org/sunspot/sunspot.png)](http://travis-ci.org/sunspot/sunspot)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbrutuscat%2Fsunspot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbrutuscat%2Fsunspot?ref=badge_shield)
 
 Sunspot is a Ruby library for expressive, powerful interaction with the Solr
 search engine. Sunspot is built on top of the RSolr library, which
@@ -861,3 +862,6 @@ $ yardoc -o docs */lib/**/*.rb - README.md
 ## License
 
 Sunspot is distributed under the MIT License, copyright (c) 2008-2009 Mat Brown
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbrutuscat%2Fsunspot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbrutuscat%2Fsunspot?ref=badge_large)
